@@ -1,0 +1,18 @@
+{
+  "host": "0.0.0.0",
+  "port": 5000,
+
+  "jwt_secret": "classifier_backend",
+  "jwt_algorithm": "HS256",
+  "jwt_expire": 1440,
+
+  "mongo_addr": "mongo",
+  "mongo_port": 27017,
+  "mongo_db": "classifier_backend",
+
+  "redis_addr": "redis",
+  "redis_port": 6379,
+  "redis_db": 0,
+
+  "debug": true
+}

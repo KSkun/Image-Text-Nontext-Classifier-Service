@@ -1,0 +1,111 @@
+version: "3.9"
+
+services:
+  # databases
+  redis:
+    image: redis:6.2.6-alpine
+    expose:
+      - "6379"
+    environment:
+      - TZ=Asia/Shanghai
+    container_name: image_classifier_redis
+    volumes:
+      - ./data/redis:/data
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - image_classifier
+  mongo:
+    image: mongo:5.0.5
+    expose:
+      - "27017"
+    environment:
+      - TZ=Asia/Shanghai
+      - MONGO_INITDB_DATABASE=classifier_backend
+    container_name: image_classifier_mongo
+    volumes:
+      - ./data/mongo:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - image_classifier
+
+  # frontend
+  frontend:
+    build:
+      context: ./frontend
+      network: host
+    ports:
+      - "1234:80"
+    environment:
+      - TZ=Asia/Shanghai
+    container_name: image_classifier_frontend
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./log:/app/log
+      - ./static/tmp:/app/tmp
+      - ./static/text:/app/text
+      - ./static/nontext:/app/nontext
+    networks:
+      - image_classifier
+
+  # backend
+  backend:
+    build:
+      context: ./backend
+      network: host
+    expose:
+      - "5000"
+    environment:
+      - CONFIG_FILE=docker_debug.json
+      - TZ=Asia/Shanghai
+      - FLASK_ENV=development
+    container_name: image_classifier_backend
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/backend:/app/workdir/config:ro
+    networks:
+      - image_classifier
+    depends_on:
+      - mongo
+      - redis
+  
+  # spider
+  spider_1:
+    build: 
+      context: ./spider
+      network: host
+    environment:
+      - CONFIG_FILE=docker.json
+      - TZ=Asia/Shanghai
+    container_name: image_classifier_spider_1
+    volumes:
+      - ./static/tmp:/app/workdir/tmp
+      - ./config/spider:/app/workdir/config:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - image_classifier
+    depends_on:
+      - backend
+
+  # classifier
+  classifier_1:
+    build: 
+      context: ./classifier
+      network: host
+    environment:
+      - CONFIG_FILE=docker.json
+      - TZ=Asia/Shanghai
+    container_name: image_classifier_classifier_1
+    volumes:
+      - ./static/tmp:/app/workdir/tmp
+      - ./static/text:/app/workdir/text
+      - ./static/nontext:/app/workdir/nontext
+      - ./config/classifier:/app/workdir/config:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - image_classifier
+    depends_on:
+      - backend
+
+
+networks:
+  image_classifier:

@@ -1,0 +1,15 @@
+{
+  "mongo_addr": "mongo",
+  "mongo_port": 27017,
+  "mongo_db": "classifier_backend",
+
+  "image_tmp_dir": "tmp",
+  "image_text_dir": "text",
+  "image_nontext_dir": "nontext",
+  "image_url": "static",
+
+  "redis_addr": "redis",
+  "redis_port": 6379,
+  "redis_db": 0,
+  "consumer_id": 1
+}
