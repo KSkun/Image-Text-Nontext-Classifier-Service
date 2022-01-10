@@ -1,2 +1,6 @@
 **/docker-compose*local.yml
 **/*local.json
+
+data/
+static/
+log/
