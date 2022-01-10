@@ -1,0 +1,12 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/KSkun/Image-Classifier-Frontend
+[submodule "backend"]
+	path = backend
+	url = https://github.com/KSkun/Image-Classifier-Backend
+[submodule "spider"]
+	path = spider
+	url = https://github.com/KSkun/Image-Spider
+[submodule "classifier"]
+	path = classifier
+	url = https://github.com/KSkun/Image-Text-Nontext-Classifier
