@@ -2,6 +2,11 @@
   "host": "0.0.0.0",
   "port": 5000,
 
+  "image_tmp_dir": "tmp",
+  "image_text_dir": "text",
+  "image_nontext_dir": "nontext",
+  "image_url": "static",
+
   "jwt_secret": "classifier_backend",
   "jwt_algorithm": "HS256",
   "jwt_expire": 1440,

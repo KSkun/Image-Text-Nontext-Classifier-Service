@@ -44,6 +44,8 @@ services:
       - ./static/tmp:/app/tmp
       - ./static/text:/app/text
       - ./static/nontext:/app/nontext
+    depends_on:
+      - backend
     networks:
       - image_classifier
 
@@ -61,6 +63,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config/backend:/app/workdir/config:ro
+      - ./static/tmp:/app/workdir/tmp
+      - ./static/text:/app/workdir/text
+      - ./static/nontext:/app/workdir/nontext
     networks:
       - image_classifier
     depends_on:
