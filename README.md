@@ -26,9 +26,11 @@ The service is split to 4 modules and developed individually, then containerized
 
 ## Configuration
 
-1. Pull this repo with command `git clone --recurse-submodules`.
-2. Check if you need a third-party source for pip or npm in `Dockerfile`. Note that `frontend/Dockerfile` uses a HTTP proxy server by default, remember to configurate it for your environment.
-3. Set the port you want in `ports` field of frontend in `docker-compose.yml`.
-4. Run `docker-compose up -d`, wait for building image & creating containers. If you need a development environment, use `docker-compose-debug.yml` instead.
-5. Test it with your browser.
+1. Install `git` and `git-lfs`.
+2. Pull this repo with command `git clone --recurse-submodules`.
+3. In `./classifier` folder, run `git lfs pull`.
+4. Check if you need a third-party source for pip or npm in `Dockerfile`. Note that `frontend/Dockerfile` uses a HTTP proxy server by default, remember to configurate it for your environment.
+5. Set the port you want in `ports` field of frontend in `docker-compose.yml`.
+6. Run `docker-compose up -d`, wait for building image & creating containers. If you need a development environment, use `docker-compose-debug.yml` instead.
+7. Test it with your browser.
 
