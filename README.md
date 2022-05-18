@@ -1,6 +1,6 @@
 # Image-Text-Nontext-Classifier-Service
 
-Text/non-text image crawler &amp; classifier service. Software course project of EIC, HUST.
+Text/non-text image crawler &amp; classifier service. Software course project of EIC, HUST (2021 Autumn).
 
 ## Features
 
